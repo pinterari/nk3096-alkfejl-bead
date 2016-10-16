@@ -22,5 +22,25 @@ A program főbb céljai közé tartozik, hogy a felhasználók könnyen nyomon k
     
 ###### Nem funkcionális követelmények
 - **Átláthatóság**: Könnyen el lehessen igazodni az oldalon, logikus elrendezés, letisztult design
-- **Védelem**: A felhasználó tényleg csak olyan oldalakat nézhessen meg és használhasson amikre valóban van jogosultsága; a jelszavak kódolt tárolása; adatok validálása mielőtt elmentenénk őket az adatbázisba
 - **Bővíthetőség**: A program további funkciókkal való bővítésének, továbbfejlesztésének lehetővé tétele
+- **Védelem**: A felhasználó tényleg csak olyan oldalakat nézhessen meg és használhasson amikre valóban van jogosultsága; a jelszavak kódolt tárolása; adatok validálása mielőtt elmentenénk őket az adatbázisba
+
+### 1.2 Használati-eset modell
+
+###### Felhasználói szerepkörök
+- **Vendég**: Nem bejelentkezett felhasználó; számára csak a publikus oldalak érhetőek el: a bejelentkezés, a regisztráció és az oldal tematikáját leíró főoldal
+- **Teljes jogkörű felhasználó**, *"Nagykorú"*: Létrehozhat csoportokat, gyűjtéseket és kezelheti őket; meghívhat felhasználókat a csoportjaiba; a csoportjaiban szereplő kiskorúak kiadásait is megnézheti
+- **Korlátozott jogkörű felhasználó**, *"Kiskorú"*: Saját kiadásait, bevételeit kezelheti, de csoportokat illetve gyűjtéseket nem tud létrehozni, módosítani, törölni.
+
+###### Use Case Diagram
+![Use Case Diagram](docs/images/usecase.png)
+
+###### Példafolyamat - Kiadás hozzáadása
+1. Bejelentkezés
+2. Ezután a felhasználó egyből a kiadásait listázó oldalra kerül, ahol lehetősége van új kiadást felvenni; az új tétel hozzáadása gombra nyomva lehet a felülethez jutni
+3. Kiadás részletezése:
+  - Összeg meghatározása
+  - Dátum kiválasztása
+  - Kategória kiválasztása
+  - Opcionális esetben komment írása
+4. A hozzáadás gombra kattintva a kiadás hozzáadódik a felhasználó tételeihez, majd a felhasználót átirányítjuk a tételeket listázó oldalra
