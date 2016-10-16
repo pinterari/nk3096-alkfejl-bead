@@ -1,6 +1,21 @@
 # Családi büdzsé tervező és nyilvántartó
-> ELTE IK Alkalmazások fejlesztése beadandó, 2017/2016/1
-> Pintér Arianna (NK3096)
+> ELTE IK Alkalmazások fejlesztése beadandó | Pintér Arianna (NK3096)
 
 ## 1. Követelményanalízis
-A program főbb céljai közé tartozik az, hogy a családok, lakótársak, baráti társaságok könnyebben nyilvántarthassák a kiadásaikat, felkészülhessenek jövőbeli komolyabb kiadásra, illetve ellenőrizhessék a kiskorúak költekezését.
+
+### 1.1 Célkitűzés
+A program főbb céljai közé tartozik, hogy a felhasználók könnyen nyomon követhessék, hogy mire költenek; ellenőrzihessék gyermekeik kiadásait, valamint a családok, lakótársak, baráti társaságok megtervezhessék jövőbeli komolyabb közös kiadásaikat. Az alkalmazás ezen funkciói csak bejelentkezett felhasználóknak elérhetőek. Lehetőség van teljes jogú userként való regisztrációra, valamint csoportba történő regisztrációval is bővülhet a felhasználók tábora, legyen szó teljes vagy akár korlátozott jogkorű userről.
+
+###### Funckionális követelmények
+- Regisztráció
+- Bejelentkezés
+- Bejelentkezett felhasználóként elérhető funkciók:
+    - Saját kiadások, bevételek menedzselése (megtekintés, hozzáadás, módosítás, törlés)
+    - Saját csoportok megtekintése
+    - Saját csoportok gyűjtéseinek megtekintése, hozzájárulás
+    - Profiladatok megtekintése, szerkesztése
+- Kizárólag teljes jogkörű userként használható funckiók:
+    - Csoportok létrehozása, módosítása, törlése
+    - Gyűjtés indítása, módosítása, teljesítettnek jelölése, törlése
+    - Felhasználók meghívása a saját csoportokba teljes vagy korlátozott jogkörű userként
+    - Csoport korlátozott jogkörű tagjainak kiadásainak megtekintése
