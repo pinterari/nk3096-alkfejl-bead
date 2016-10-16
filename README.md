@@ -19,3 +19,8 @@ A program főbb céljai közé tartozik, hogy a felhasználók könnyen nyomon k
     - Gyűjtés indítása, módosítása, teljesítettnek jelölése, törlése
     - Felhasználók meghívása a saját csoportokba teljes vagy korlátozott jogkörű userként
     - Csoport korlátozott jogkörű tagjainak kiadásainak megtekintése
+    
+###### Nem funkcionális követelmények
+- **Átláthatóság**: Könnyen el lehessen igazodni az oldalon, logikus elrendezés, letisztult design
+- **Védelem**: A felhasználó tényleg csak olyan oldalakat nézhessen meg és használhasson amikre valóban van jogosultsága; a jelszavak kódolt tárolása; adatok validálása mielőtt elmentenénk őket az adatbázisba
+- **Bővíthetőség**: A program további funkciókkal való bővítésének, továbbfejlesztésének lehetővé tétele
