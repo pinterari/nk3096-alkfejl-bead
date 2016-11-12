@@ -1,0 +1,16 @@
+{% extends 'parent' %}
+
+{% block content %}
+  <div>
+      {% for category in categories %}
+        {{category.name}}
+        <div>
+            {% for expense in category.expenses %}
+            <li class="list-group-item">
+               {{expense.date}} | {{ expense.username }} - {{expense.amount}} Ft ({{expense.comment}})
+            </li>
+            {% endfor %}
+        </div>
+      {% endfor %}
+  </div>
+{% endblock %}
