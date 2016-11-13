@@ -16,6 +16,15 @@ class User extends Lucid {
     return this.hasMany('App/Model/TeamMember');
   }
 
+    static get rules () {
+        return {
+            username: 'required|alpha_numeric|unique:users',
+            email: 'required|email|unique:users',
+            password: 'required|min:4',
+            passwordAgain: 'required|same:password'
+        }
+    };
+
 }
 
-module.exports = User
+module.exports = User;

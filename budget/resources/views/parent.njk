@@ -24,11 +24,21 @@
             </button>
             <a class="navbar-brand" href="/">Budget</a>
             </div>
+
+            <ul class="nav navbar-nav navbar-right">
+            {% if currentUser %}
+              <li class="navbar-text">Szia, {{ currentUser.username }}!</li>
+              <li><a href="/logout">Kilépés</a></li>
+            {% else %}
+              <li><a href="/login">Belépés</a></li>
+              <li><a href="/signup">Regisztráció</a></li>
+            {% endif %}
+          </ul>
         </div>
     </nav>
 
 <div class = "container" >
-</h3>Kiadások</h3>
+
 {% block content %}{% endblock %}
 </div>
 

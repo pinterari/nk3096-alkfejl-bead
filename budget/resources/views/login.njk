@@ -1,0 +1,37 @@
+{% extends 'parent' %}
+
+{% block content %}
+
+<h1> Bejelentkezés </h1>
+
+        <ul>
+        {% for error in old('errors') %}
+            <li>{{error.message}}</li>
+        {% endfor %}
+        </ul>
+
+        <form class = "form-horizontal" method="POST">
+            <fieldset>
+                {{ csrfField }}
+                <div class="form-group">
+                    <label name = "username" for="username" class="col-lg-2 control-label">Felhasználónév</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" name="username" id="username">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label name = "password" for="password" class="col-lg-2 control-label">Jelszó</label>
+                    <div class="col-lg-10">
+                        <input type="password" class="form-control" name="password" id="password">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Mehet</button>
+                </div>
+            </fieldset>
+        </form> 
+    </div>
+
+{% endblock %}
