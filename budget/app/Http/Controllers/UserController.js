@@ -2,6 +2,7 @@
 
 const Validator = use('Validator');
 const User = use('App/Model/User');
+const Expense = use('App/Model/Expense');
 const Hash = use('Hash');
 
 class UserController {
@@ -31,11 +32,26 @@ class UserController {
             return
         } 
 
+        
         delete userData.passwordAgain;
         userData.password = yield Hash.make(userData.password);
 
         var user = yield User.create(userData);
         yield user.save();
+
+        if(parseInt(post.funds) > 0) {
+            var today = new Date();
+            var expenseData = {
+                username: post.username,
+                amount: parseInt(post.funds),
+                category_id: 0,
+                date: today.toISOString().slice(0, 10)
+            }
+
+            var expense = yield Expense.create(expenseData);
+            yield expense.save();
+        }
+
         yield req.auth.login(user);
         res.redirect('/');
     }
