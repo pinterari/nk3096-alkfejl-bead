@@ -1,0 +1,84 @@
+{% extends 'parent' %}
+
+{%block content%}
+
+<form class="form-inline" method="POST">
+    {{ csrfField }}
+    <div class="input-group date">
+        <input type="text" name="date" id="date" class="form-control" readonly><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+    </div>
+     <div class="form-group">
+        <button type="submit" class="btn btn-primary">Mehet</button>
+    </div>
+</form>
+
+<script>
+    $(' .input-group.date').datepicker({
+        format: "yyyy-mm-dd",
+        startView: 1,
+        minViewMode: 1,
+        maxViewMode: 2,
+        language: "hu",
+        orientation: "bottom auto"
+});
+</script>
+ 
+  <table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>Dátum</th>
+      <th>Kategória</th>
+      <th>Összeg</th>
+      <th>Megjegyzés</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for exp in expenses|sort(false, true, 'date') %}
+        {% if exp.date >= beginDate and exp.date < endDate %}
+            <tr>
+                <td>{{exp.date}}</td>
+                <td>
+                    {%for category in categories%}
+                        {%if exp.category_id == category.id %} 
+                            {{category.name}}
+                        {%endif%}
+                    {%endfor%}
+                </td>
+                <td>
+                    {% if exp.amount < 0%}
+                        <font color="red">{{ exp.amount * -1 }}</font>
+                    {% else %}
+                        <font color="green">{{ exp.amount }}</font>
+                    {% endif %} Ft 
+                </td>
+                <td>
+                    {% if exp.comment %}
+                        {{exp.comment}}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+  </tbody>
+</table>
+
+<div class="progress">
+  <div class="progress-bar progress-bar-success" style="width: {{sum/budget*100}}%;"></div>
+</div>
+
+
+{% if isCurrent === true %} <h4>Jelenlegi összeg: </h4> {%else%} <h4>Hó végi összeg: </h4> {%endif%}
+    {% if sum < 0%}
+        <font color="red">{{sum}}</font>
+    {% else %}
+        <font color="green">{{sum}}</font>
+    {% endif %} Ft
+
+<h4>Havi költségvetés: </h4>
+    {% if budget < 0%}
+        <font color="red">{{budget}}</font>
+    {% else %}
+        <font color="green">{{budget}}</font>
+    {% endif %} Ft
+
+{% endblock %}

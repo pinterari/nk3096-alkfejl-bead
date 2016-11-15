@@ -5,7 +5,7 @@ const User = use('App/Model/User');
 const Hash = use('Hash');
 
 class UserController {
-    
+
     * signUp (req, res) {
         yield res.sendView('signup');
     }
@@ -71,6 +71,10 @@ class UserController {
 
     * logout (req, res) {
         yield req.auth.logout(); res.redirect('/');
+    }
+
+    * main (req, res) {
+        yield res.sendView('main');
     }
 }
 

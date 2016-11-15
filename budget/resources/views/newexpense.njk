@@ -1,0 +1,72 @@
+{% extends 'parent' %}
+
+{% block content %}
+
+<h1> Új kiadás vagy bevétel </h1>
+
+        <ul>
+        {% for error in old('errors') %}
+            <li>{{error.message}}</li>
+        {% endfor %}
+        </ul>
+
+        <form class = "form-horizontal" method="POST">
+            <fieldset>
+                {{ csrfField }}
+                <!-- datepicker -->
+
+
+                 <div class="form-group">
+                    <label name = "date" for="date" class="col-lg-2 control-label">Dátum</label>
+                    <div class="col-lg-10">
+                        <input type="date" class="form-control" id="date" name="date">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label name = "amount" for="amount" class="col-lg-2 control-label">Összeg</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" name="amount" id="amount">
+                        <span class="input-group-addon">Ft</span>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Kategória</label>
+                    <div class="col-lg-10">
+                        <div class="radio">
+                        {% for category in categories %}
+                        {% if category.isExpense == true %}
+                        <label>
+                            <input type="radio" name="category" id="{{category.id}}" value="{{category.id}}" checked="">
+                            <font color="red">{{category.name}}</font>
+                        </label>
+                        {% else %}
+                         <label>
+                            <input type="radio" name="category" id="{{category.id}}" value="{{category.id}}" checked="">
+                            <font color="green">{{category.name}}</font>
+                        </label>
+                        {%endif%}
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label name = "comment" for="comment" class="col-lg-2 control-label">Megjegyzés</label>
+                    <div class="col-lg-10">
+                        <textarea class="form-control" rows="3" name="comment" id="commnet"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Mehet</button>
+                </div>
+            </fieldset>
+        </form> 
+    </div>
+
+
+
+{% endblock %}
