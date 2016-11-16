@@ -46,10 +46,8 @@ class ExpenseController {
         const begin = post.date;
 
         var beginDate = new Date(begin);
-        console.log("begindate ", beginDate);
         var endDate = new Date(begin);
         endDate.setMonth(beginDate.getMonth()+1);
-        console.log("endDate ", endDate);
         var end = endDate.toISOString().slice(0, 10);
 
         const categories = yield Category.with('expenses').fetch();
@@ -95,9 +93,7 @@ class ExpenseController {
             category_id: post.category,
             comment: post.comment
         }
-
-        console.log(expenseData);
-
+        
         const validation = yield Validator.validateAll(expenseData, Expense.rules);
 
         if(validation.fails()){

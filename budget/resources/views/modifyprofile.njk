@@ -1,0 +1,59 @@
+{% extends 'parent' %}
+
+{% block content %}
+
+<h3> Profil szerkesztése </h3>
+<h5>Ha nem kívánod szerkeszteni az adott adatot, ne változtasd meg a mező értékét.</h5>
+
+        <ul>
+        {% for error in old('errors') %}
+            <li>{{error.message}}</li>
+        {% endfor %}
+        </ul>
+
+        <form class = "form-horizontal" method="POST">
+            <fieldset>
+                {{ csrfField }}
+                <div class="form-group">
+                    <label name = "username" for="username" class="col-lg-2 control-label">Felhasználónév</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" name="username" id="username" value="{{currentUser.username}}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label name = "email" for="email" class="col-lg-2 control-label">Email</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" name="email" id="email" value="{{currentUser.email}}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label name = "name" for="name" class="col-lg-2 control-label">Név</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" name="name" id="name" value="{{currentUser.name}}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label name = "password" for="password" class="col-lg-2 control-label">Új jelszó</label>
+                    <div class="col-lg-10">
+                        <input type="password" class="form-control" name="password" id="password">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label name = "passwordAgain" for="passwordAgain" class="col-lg-2 control-label">Új jelszó (ismét)</label>
+                    <div class="col-lg-10">
+                        <input type="password" class="form-control" name="passwordAgain" id="passwordAgain">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Módosítás</button>
+                </div>
+            </fieldset>
+        </form> 
+    </div>
+
+{% endblock %}

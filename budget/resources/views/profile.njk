@@ -1,0 +1,44 @@
+{% extends 'parent' %}
+
+{% block content %}
+
+<h3>Profil <a href="/profile-edit">[Szerkesztés]</a> </h3>
+<div class="list-group">
+  <a class="list-group-item">
+    <h5 class="list-group-item-heading"><b>Felhasználónév</b></h5>
+    <p class="list-group-item-text">{{currentUser.username}}</p>
+  </a>
+  {% if currentUser.name %}
+  <a class="list-group-item">
+    <h5 class="list-group-item-heading"><b>Név</b></h5>
+    <p class="list-group-item-text">{{currentUser.name}}</p>
+  </a>
+  {% endif %}
+  <a class="list-group-item">
+    <h5 class="list-group-item-heading"><b>Email</b></h5>
+    <p class="list-group-item-text">{{currentUser.email}}</p>
+  </a>
+  <a class="list-group-item">
+    <h5 class="list-group-item-heading"><b>Regisztráció időpontja</b></h5>
+    <p class="list-group-item-text">{{currentUser.created_at}}</p>
+  </a>
+</div>
+
+<h4>Csoportjaid:</h4>
+
+{% for team in teams %}
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{team.name}}</h3>
+  </div>
+  <div class="panel-body">
+    {%for member in teammates%}
+        {% if member.username != currentUser.username %}
+            - <a href="/profile/{{member.username}}">{{ member.username | indent(6, true) }}</a> <br>
+        {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}
