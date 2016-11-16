@@ -36,6 +36,13 @@
             {% endif %}
             </ul>
 
+            <form class="navbar-form navbar-left"  action="/search" method="GET">
+                <div class="form-group">
+                <input type="text" class="form-control" name="query" placeholder="Felhasználó keresése">
+                </div>
+                <button type="submit" class="btn btn-primary">Mehet</button>
+            </form>
+
             <ul class="nav navbar-nav navbar-right">
             {% if currentUser %}
               <li><a href="/profile">Szia, {{ currentUser.username }}!</a></li>
