@@ -8,7 +8,10 @@ const Validator = use('Validator');
 class ExpenseController {
 
     *list (req,res) {
-       // if(!req.currentUser) res.redirect('/');
+        if(!req.currentUser) {
+            res.unauthorized('Access denied');
+            return    
+        }
 
         var beginDate = new Date();
         beginDate.setDate(1);
@@ -42,6 +45,11 @@ class ExpenseController {
     }
 
     * listDate(req, res) {
+         if(!req.currentUser) {
+            res.unauthorized('Access denied');
+            return    
+        }
+
         const post = req.post();
         const begin = post.date;
 
@@ -75,7 +83,10 @@ class ExpenseController {
     }
 
     * makeNew(req, res) {
-  //      if(!req.currentUser) res.redirect('/');
+        if(!req.currentUser) {
+            res.unauthorized('Access denied');
+            return    
+        }
         
         const categories = yield Category.with('expenses').fetch();
 
@@ -85,6 +96,11 @@ class ExpenseController {
     }
 
     * doMakeNew(req,res){
+         if(!req.currentUser) {
+            res.unauthorized('Access denied');
+            return    
+        }
+
         var post = req.post();
 
         var expenseData = {
@@ -93,7 +109,7 @@ class ExpenseController {
             category_id: post.category,
             comment: post.comment
         }
-        
+
         const validation = yield Validator.validateAll(expenseData, Expense.rules);
 
         if(validation.fails()){
@@ -112,6 +128,19 @@ class ExpenseController {
         const expense = yield Expense.create(expenseData);
         res.redirect('/');
     }
+
+     *delete (req,res){
+         const id = req.param('id');
+         const expense = yield Expense.find(id);
+
+         if(req.currentUser.username != expense.username) {
+             res.unauthorized('Access denied');
+             return
+         }
+
+         yield expense.delete();
+         res.redirect('/expenses');
+     }
 }
 
 module.exports = ExpenseController;

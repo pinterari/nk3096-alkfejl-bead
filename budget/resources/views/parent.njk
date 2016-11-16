@@ -38,7 +38,7 @@
 
             <ul class="nav navbar-nav navbar-right">
             {% if currentUser %}
-              <li class="navbar-text">Szia, {{ currentUser.username }}!</li>
+              <li><a href="/profile">Szia, {{ currentUser.username }}!</a></li>
               <li><a href="/logout">Kilépés</a></li>
             {% else %}
               <li><a href="/login">Belépés</a></li>

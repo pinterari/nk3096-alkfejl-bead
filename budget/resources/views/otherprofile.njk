@@ -24,12 +24,14 @@
   </a>
 </div>
 
+{% if teams.length > 0 %}
 <h4>Csoportok:</h4>
 <ul>
 {% for team in teams %}
     <li>{{team.name}}</li>
 {% endfor %}
 </ul>
+{% endif %}
 
 {% if supervisor == true %}
 <h4>Kiadások:</h4>

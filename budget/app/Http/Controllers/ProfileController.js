@@ -11,6 +11,10 @@ const Hash = use('Hash');
 class ProfileController {
 
     * ownProfile(req, res) {
+         if(!req.currentUser) {
+            res.redirect('/');   
+        }
+
         const own_teams = yield TeamMember.query().where('username', req.currentUser.username);
         const team_members = yield TeamMember.with('teams');
         const teams = yield Team.with('team_members');
@@ -34,6 +38,11 @@ class ProfileController {
     }
 
     * doEditProfile(req, res){
+         if(!req.currentUser) {
+            res.unauthorized('Access denied');
+            return    
+        }
+
         var userData = req.except('_csrf');
         var currentUser = req.currentUser.toJSON()
 
@@ -67,40 +76,50 @@ class ProfileController {
 
     * otherProfile (req,res) {
         var username = req.param('username');
-        if(username == req.currentUser.username) res.redirect('/profile');
+        if(req.currentUser && username == req.currentUser.username) { res.redirect('/profile'); return }
 
         const user = yield User.findBy('username', username);
-        if(!user) res.redirect('/');
+        if(!user) {res.redirect('/'); return}
 
-        const teams = yield Team.with('team_members');
-        const currentUserTeams = yield TeamMember.query().where('username', req.currentUser.username);
+        const allteams = yield Team.with('team_members');
         const otherUserTeams = yield TeamMember.query().where('username', username);
+        var teams = [];
 
-        var currentUserIsSupervisor = false;
-        for(var i = 0; i < currentUserTeams.length; i++) {
-            for(var j = 0; j < otherUserTeams.length; j++) {
-                if(currentUserTeams[i].team_id == otherUserTeams[j].team_id &&
-                   currentUserTeams[i].is_supervisor && !otherUserTeams[j].is_supervisor) {
-                       currentUserIsSupervisor = true;
-                       break;  
-                   }
+        for(var i = 0; i < otherUserTeams.length; i++) {
+            for(var j = 0; j < allteams.length; j++) {
+                if(allteams[i].id == otherUserTeams[j].team_id) teams.push(allteams[i]);
             }
         }
 
-        var expenses = null; var categories = null;
-        if(currentUserIsSupervisor) {
-            categories = yield Category.with('expenses');
-            expenses = yield Expense.query().where('username', username);
+        var currentUserIsSupervisor = false;
+        if(req.currentUser) {
+            const currentUserTeams = yield TeamMember.query().where('username', req.currentUser.username);
+
+            for(var i = 0; i < currentUserTeams.length; i++) {
+                for(var j = 0; j < otherUserTeams.length; j++) {
+                    if(currentUserTeams[i].team_id == otherUserTeams[j].team_id &&
+                       currentUserTeams[i].is_supervisor && !otherUserTeams[j].is_supervisor) {
+                        currentUserIsSupervisor = true;
+                        break;  
+                    }
+                }
+            }
+
+            var expenses = null; var categories = null;
+            if(currentUserIsSupervisor) {
+                categories = yield Category.with('expenses');
+                expenses = yield Expense.query().where('username', username);
+            }
         }
 
         yield res.sendView('otherprofile', {
             user: user,
             supervisor: currentUserIsSupervisor,
-            categories: categories,
-            expenses: expenses,
+            categories: req.currentUser ? categories : null,
+            expenses: req.currentUser ? expenses : null,
             teams: teams
         })
     }
 }
 
-module.exports = ProfileController
+module.exports = ProfileController;

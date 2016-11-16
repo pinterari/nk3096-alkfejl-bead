@@ -32,7 +32,6 @@ class UserController {
             return
         } 
 
-        
         delete userData.passwordAgain;
         userData.password = yield Hash.make(userData.password);
 
@@ -75,8 +74,7 @@ class UserController {
         } catch(err) {
             yield req
                 .withAll()
-                 .andWith({errors: [
-                    {
+                 .andWith({errors: [{
                         message: "Hibás bejelentkezési adatok."
                     }
                 ]})
