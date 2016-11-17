@@ -4,27 +4,34 @@
 
 <h1>Találatok</h1>
 
-    {% for user in users.data | sort(false, true, 'username') %}
-        <div class="row">
-            <h3> <a href="/profile/{{user.username}}"> {{user.username}}</a> </h3>
-            <p> {{user.name}} </p>
-        </div>
-    {% endfor %}
+    {% if users.total == 0 %}
+    <p> Nincs ilyen felhasználó! </p>
 
-    {% if users.lastPage > 1 %}
-        <div class="text-center">
-            <ul class="pagination pagination-sm">
-                {% for page in range(1, users.lastPage + 1) %}
-                    {% if page == users.currentPage %}
-                    <li class="active">
-                        <a href="/search?query={{ page }}">{{ page }}</a>
-                    </li>
-                    {% else %}
-                        <li><a href="/search?query={{ page }}">{{ page }}</a></li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-        </div>
-  {%endif%}
+    {% else %}
+        {% for user in users.data | sort(false, true, 'username') %}
+            <div class="row">
+                <h3> <a href="/profile/{{user.username}}"> {{user.username}}</a> </h3>
+                <p> {{user.name}} </p>
+            </div>
+        {% endfor %}
+
+        {% if users.lastPage > 1 %}
+            <div class="text-center">
+                <ul class="pagination pagination-sm">
+                    {% for page in range(1, users.lastPage + 1) %}
+                        {% if page == users.currentPage %}
+                        <li class="active">
+                            <a href="?query={{wanted}}&page={{page}}">{{ page }}</a>
+                        </li>
+                        {% else %}
+                            <li>
+                                <a href="?query={{wanted}}&page={{page}}">{{ page }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+    {% endif %}
+  {% endif %}
 
 {% endblock %}

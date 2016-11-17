@@ -88,8 +88,8 @@ class UserController {
     }
 
     * search (req, res) {
-        var wanted = req.input('query');
-        var page = req.input('page') || 1;
+        var wanted = req.input('query') || '';
+        var page = Math.max(req.input('page'),1);
 
         var users = yield User.query()
             .where(function(){
@@ -98,7 +98,8 @@ class UserController {
             .paginate(page, 5);
 
         yield res.sendView('search', {
-            users: users.toJSON()
+            users: users.toJSON(),
+            wanted: wanted
         })
     }
 
