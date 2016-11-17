@@ -15,16 +15,21 @@ class ProfileController {
             res.redirect('/');   
         }
 
-        const own_teams = yield TeamMember.query().where('username', req.currentUser.username);
+        const membership = yield TeamMember.query().where('username', req.currentUser.username);
         const team_members = yield TeamMember.with('teams');
-        const teams = yield Team.with('team_members');
+        const allteams = yield Team.with('team_members');
         var teammates = [];
+        var teams = [];
 
-        for(var i = 0; i < team_members.length; i++) {
-            for(var j = 0; j < own_teams.length; j++) {
-                if(team_members[i].team_id == own_teams[j].team_id)
+        for(var j = 0; j < membership.length; j++) {
+             for(var i = 0; i < team_members.length; i++) {
+                if(team_members[i].team_id == membership[j].team_id)
                     teammates.push(team_members[i]);
             }
+            for(var k = 0; k < allteams.length; k++) {
+                if(allteams[k].id == membership[j].team_id)
+                    teams.push(allteams[k])
+            }  
         }
 
         yield res.sendView('profile', {

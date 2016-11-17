@@ -24,6 +24,7 @@
   </a>
 </div>
 
+{% if teams.length > 0 %}
 <h4>Csoportjaid:</h4>
 
 {% for team in teams %}
@@ -40,5 +41,6 @@
   </div>
 </div>
 {% endfor %}
+{% endif %}
 
 {% endblock %}
