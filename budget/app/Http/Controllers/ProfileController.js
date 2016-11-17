@@ -92,7 +92,7 @@ class ProfileController {
 
         for(var i = 0; i < otherUserTeams.length; i++) {
             for(var j = 0; j < allteams.length; j++) {
-                if(allteams[i].id == otherUserTeams[j].team_id) teams.push(allteams[i]);
+                if(allteams[j].id == otherUserTeams[i].team_id) teams.push(allteams[j]);
             }
         }
 

@@ -1,0 +1,39 @@
+{% extends 'parent' %}
+
+{% block content %}
+
+<h1> Új csapat </h1>
+
+        <ul>
+        {% for error in old('errors') %}
+            <li>{{error.message}}</li>
+        {% endfor %}
+        </ul>
+
+        <form class = "form-horizontal" method="POST">
+            <fieldset>
+                {{ csrfField }}
+
+                <div class="form-group">
+                    <label name = "name" for="name" class="col-lg-2 control-label">Csapatnév</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" name="name" id="name">
+                    </div>
+                </div>
+
+                <div class="form-group">        
+                    <div class="checkbox">
+                        <label class="col-lg-3 control-label">
+                            <input type="checkbox" for="supervisor" name="supervisor"> Moderátor szeretnék lenni
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Mehet</button>
+                </div>
+            </fieldset>
+        </form> 
+    </div>
+
+{% endblock %}

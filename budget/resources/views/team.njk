@@ -1,0 +1,13 @@
+{% extends 'parent' %}
+
+{% block content %}
+
+<h4>{{team.name}}</h4>
+
+<ul>
+{% for member in teammates |sort(false,true,'username') %}
+    <li><a href="/profile/{{member.username}}">{{member.username}}</a></li>
+{% endfor %}
+</ul>
+
+{% endblock %}

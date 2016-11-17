@@ -30,11 +30,11 @@
 {% for team in teams %}
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h3 class="panel-title">{{team.name}}</h3>
+    <h3 class="panel-title"><a href="/teams/{{team.id}}">{{team.name}}</a></h3>
   </div>
   <div class="panel-body">
     {%for member in teammates%}
-        {% if member.username != currentUser.username %}
+        {% if member.username != currentUser.username and team.id == member.team_id %}
             - <a href="/profile/{{member.username}}">{{ member.username | indent(6, true) }}</a> <br>
         {% endif %}
     {% endfor %}
@@ -42,5 +42,7 @@
 </div>
 {% endfor %}
 {% endif %}
+
+<p><a href="/teams/new">[Új csoport létrehozása]</a></p>
 
 {% endblock %}
