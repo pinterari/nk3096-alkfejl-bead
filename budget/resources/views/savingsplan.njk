@@ -1,0 +1,70 @@
+{% extends 'parent' %}
+
+{% block content %}
+
+<h3>{{plan.name}} {% if plan.is_fulfilled%} [TELJESÍTVE] {%endif%} </h3>
+<p>Kitűzött cél: {{plan.goal}} Ft <br>
+Jelenlegi összeg: {{plan.current}} Ft</p> <br>
+
+    <div class="progress">
+        <div class="progress-bar {% if plan.is_fulfilled%}progress-bar-success{%endif%}" style="width: {{plan.current/plan.goal*100}}%;"></div>
+    </div>
+
+    <h4>Új hozzájárulás: </h4>
+
+    <ul>
+        {% for error in old('errors') %}
+            <li>{{error.message}}</li>
+        {% endfor %}
+    </ul>
+
+    <form class = "form-inline" method="POST">
+        <fieldset>
+            {{ csrfField }}
+            <div class="form-group">
+                <label name = "date" for="date">Dátum</label>
+                    <input type="date" class="form-control" id="date" name="date">
+            </div>
+
+            <div class="form-group">
+                <label name = "amount" for="amount">Összeg</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" name="amount" id="amount">
+                    <span class="input-group-addon">Ft</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Mehet</button>
+                </div>
+        <fieldset>
+    </form>
+
+{% if funds %}
+
+<h4>Hozzájárulások:</h4>
+
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>Dátum</th>
+      <th>Felhasználó</th>
+      <th>Összeg</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for f in funds | sort(false, true, 'date') %}
+        <tr>
+            <td>{{f.date}}</td>
+            <td>{{f.username}}</td>
+            <td>{{f.amount}} Ft</td>
+            <td align="center"><a href="/funds/{{f.id}}/delete">[X]</a></td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endif %}
+
+{% endblock %}

@@ -25,3 +25,10 @@ Route.get('/search', 'UserController.search');
 Route.get('/teams/new', 'TeamController.makeNew');
 Route.post('/teams/new', 'TeamController.doMakeNew');
 Route.get('/teams/:id', 'TeamController.showTeam');
+
+Route.get('/savings/new', 'SavingsPlanController.makeNew');
+Route.post('/savings/new', 'SavingsPlanController.doMakeNew');
+Route.get('/savings/:id', 'SavingsPlanController.show');
+
+Route.post('/savings/:id', 'SavingsPlanController.newAllocatedFund');
+Route.get('/funds/:id/delete', 'SavingsPlanController.delete');

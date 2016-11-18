@@ -8,6 +8,10 @@ class Team extends Lucid {
         return this.hasMany('App/Model/TeamMember');
     }
 
+    savings_plans(){
+        return this.hasMany('App/Model/SavingsPlan');
+    }
+
 }
 
 module.exports = Team

@@ -16,14 +16,18 @@ class User extends Lucid {
     return this.hasMany('App/Model/TeamMember');
   }
 
-    static get rules () {
-        return {
-            username: 'required|alpha_numeric|unique:users',
-            email: 'required|email|unique:users',
-            password: 'required|min:4',
-            passwordAgain: 'required|same:password'
-        }
-    };
+  allocated_funds (){
+    return this.hasMany('App/Model/AllocatedFund');
+  }
+
+  static get rules () {
+      return {
+          username: 'required|alpha_numeric|unique:users',
+          email: 'required|email|unique:users',
+          password: 'required|min:4',
+          passwordAgain: 'required|same:password'
+      }
+  };
 
 }
 

@@ -3,6 +3,7 @@
 const User = use('App/Model/User')
 const Team = use('App/Model/Team');
 const TeamMember = use('App/Model/TeamMember');
+const SavingsPlan = use('App/Model/SavingsPlan');
 const Validator = use('Validator');
 
 class TeamController {
@@ -82,9 +83,13 @@ class TeamController {
             if(members[i].team_id == teamID) teammates.push(members[i]);
         }
 
+        const savings = yield SavingsPlan.query().where('team_id', teamID);
+        console.log("savings ", savings);
+
         yield res.sendView('team', {
             team: team,
-            teammates: teammates
+            teammates: teammates,
+            savings: savings
         });
     }
 }
