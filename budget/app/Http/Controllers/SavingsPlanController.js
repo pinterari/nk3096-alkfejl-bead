@@ -137,7 +137,7 @@ class SavingsPlanController {
         });
     }
 
-    * delete (req, res) {
+    * deleteFund (req, res) {
         if(!req.currentUser) { res.unauthorized('Access denied'); return }
         const id = req.param('id');
         const fund = yield AllocatedFunds.find(id);
@@ -153,6 +153,32 @@ class SavingsPlanController {
          yield fund.delete();
 
          res.redirect('back');
+    }
+
+    * deletePlan (req, res) {
+        if(!req.currentUser) { res.unauthorized('Access denied'); return }
+        const id = req.param('id');
+        const plan = yield SavingsPlan.find(id);
+        const member = yield TeamMember.query().where('username',req.currentUser.username);
+
+        var canDelete = false;
+        for(var i = 0; i < member.length; i++) {
+            if(member[i].team_id == plan.attributes.team_id && member[i].is_supervisor) {
+                canDelete = true; break;
+            }
+        }
+
+        if(canDelete) {
+            const funds = yield AllocatedFunds.query().where('plan_id', plan.attributes.id);
+            for(var i = funds.length-1; i >= 0; i--) {
+                const fund = yield AllocatedFunds.find(funds[i].id);
+                yield fund.delete();
+            }
+            yield plan.delete();
+            res.redirect('back');
+        } else {
+            res.redirect('back'); return
+        }
     }
 
 }

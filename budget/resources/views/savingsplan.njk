@@ -3,6 +3,7 @@
 {% block content %}
 
 <h3>{{plan.name}} {% if plan.is_fulfilled%} [TELJESÍTVE] {%endif%} </h3>
+<p><a href="/savings/{{plan.id}}/delete">[Törlés]</a></p>
 <p>Kitűzött cél: {{plan.goal}} Ft <br>
 Jelenlegi összeg: {{plan.current}} Ft</p> <br>
 

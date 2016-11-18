@@ -31,4 +31,5 @@ Route.post('/savings/new', 'SavingsPlanController.doMakeNew');
 Route.get('/savings/:id', 'SavingsPlanController.show');
 
 Route.post('/savings/:id', 'SavingsPlanController.newAllocatedFund');
-Route.get('/funds/:id/delete', 'SavingsPlanController.delete');
+Route.get('/savings/:id/delete', 'SavingsPlanController.deletePlan');
+Route.get('/funds/:id/delete', 'SavingsPlanController.deleteFund');
