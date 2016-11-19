@@ -24,18 +24,9 @@ class TeamController {
         }
 
         var post = req.post();
-        var data = {
-            name: post.name,
-            username: req.currentUser.username,
-            isSupervisor: post.supervisor == 'on' ? '1' : '0'
-        }
+        var data = { name: post.name, username: req.currentUser.username }
 
-        const rules = {
-            name: 'required',
-            username: 'required',
-            isSupervisor: 'required|boolean'
-        }
-
+        const rules = { name: 'required', username: 'required' }
         const validation = yield Validator.validateAll(data, rules);
 
         if(validation.fails()){
@@ -47,14 +38,12 @@ class TeamController {
             return
         }
 
-        const team = yield Team.create({
-            name: post.name
-        });
+        const team = yield Team.create({ name: post.name });
 
         const member = yield TeamMember.create({
             team_id: team.id,
             username: data.username,
-            is_supervisor: data.isSupervisor
+            is_supervisor: true
         });
 
         res.redirect('/profile');
@@ -69,9 +58,10 @@ class TeamController {
         var teamID = req.param('id');
         const currentUserTeams = yield TeamMember.query().where('username', req.currentUser.username);
         var isMember = false;
+        var isSupervisor = false;
         for(var i = 0; i < currentUserTeams.length; i++){
             if(currentUserTeams[i].team_id == teamID) {
-                isMember = true; break;
+                isMember = true; isSupervisor = currentUserTeams[i].is_supervisor; break;
             }
         }
 
@@ -89,7 +79,8 @@ class TeamController {
         yield res.sendView('team', {
             team: team,
             teammates: teammates,
-            savings: savings
+            savings: savings,
+            isSupervisor: isSupervisor
         });
     }
 
@@ -101,35 +92,24 @@ class TeamController {
         const team = yield Team.find(id);
         const members = yield TeamMember.query().where('team_id', id);
 
-        var canAdd = false;
-        for(var i = 0; i < members.length; i++) {
-            if(members[i].username == req.currentUser.username && members[i].is_supervisor) {
-                canAdd = true; break;
+        var availableUsers = [];
+        for(var i = 0; i < users.length; i++) {
+            var isMember = false;
+            for(var j = 0; j < members.length; j++) {
+                if(members[j].team_id == id && users[i].username == members[j].username) {isMember = true; break}
             }
+            if(!isMember) availableUsers.push(users[i]);
         }
 
-        if(canAdd) {
-            var availableUsers = [];
-            for(var i = 0; i < users.length; i++) {
-                var isMember = false;
-                for(var j = 0; j < members.length; j++) {
-                    if(members[j].team_id == id && users[i].username == members[j].username) {isMember = true; break}
-                }
-                if(!isMember) availableUsers.push(users[i]);
-            }
+        yield res.sendView('newmember', {
+            users: availableUsers,
+            team: team
+        });
 
-            yield res.sendView('newmember', {
-                users: availableUsers,
-                team: team
-            });
-        } else {
-            res.redirect('back'); return
-        }
     }
 
     * makeNewMember (req, res) {
         var post = req.post(); const id = req.param('id');
-        console.log('post', post);
 
         var memberData = { username: post.member, isSupervisor: post.isSupervisor };
         const rules = { username: 'required', isSupervisor: 'required' }
@@ -142,9 +122,6 @@ class TeamController {
             res.redirect('back')
             return
         }
-
-        const user = yield User.findBy('username', memberData.username);
-        console.log("user ", user);
 
         const member = yield TeamMember.create({
             team_id : id,

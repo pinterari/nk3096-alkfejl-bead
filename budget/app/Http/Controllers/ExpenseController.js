@@ -126,7 +126,7 @@ class ExpenseController {
         if(cat.isExpense) expenseData.amount *= -1;
 
         const expense = yield Expense.create(expenseData);
-        res.redirect('/');
+        res.redirect('/expenses');
     }
 
      *delete (req,res){

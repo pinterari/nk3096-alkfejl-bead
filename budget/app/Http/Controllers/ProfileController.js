@@ -103,7 +103,7 @@ class ProfileController {
             for(var i = 0; i < currentUserTeams.length; i++) {
                 for(var j = 0; j < otherUserTeams.length; j++) {
                     if(currentUserTeams[i].team_id == otherUserTeams[j].team_id &&
-                       currentUserTeams[i].is_supervisor && !otherUserTeams[j].is_supervisor) {
+                       currentUserTeams[i].is_supervisor == 'true' && otherUserTeams[j].is_supervisor == 'false') {
                         currentUserIsSupervisor = true;
                         break;  
                     }

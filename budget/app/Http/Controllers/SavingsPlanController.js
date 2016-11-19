@@ -17,11 +17,11 @@ class SavingsPlanController {
         const plan = yield SavingsPlan.findBy('id',id);
         var plan_json = plan ? plan.toJSON() : null;
 
-        var accessible = false;
+        var accessible = false; var isSupervisor = false;
         const member = yield TeamMember.query().where('username', req.currentUser.username);
         for(var i = 0; i < member.length; i++) {
             if(plan_json && member[i].team_id == plan_json.team_id) {
-                accessible = true; break;
+                accessible = true; isSupervisor = member[i].is_supervisor; break;
             }
         }
 
@@ -30,7 +30,8 @@ class SavingsPlanController {
 
             yield res.sendView('savingsplan', {
                 plan: plan_json,
-                funds: funds
+                funds: funds,
+                isSupervisor: isSupervisor
             });
         } else { res.redirect('/'); return} 
     }

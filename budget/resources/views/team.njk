@@ -10,12 +10,11 @@
 {% endfor %}
 </ul>
 
-<p><a href="/teams/{{team.id}}/newmember">[Új tag felvétele]</a>
+<p>{% if isSupervisor == true %}<a href="/teams/{{team.id}}/newmember">[Új tag felvétele]</a> {%endif%}
 <a href="/teams/{{team.id}}/quit">[Kilépés a csapatból]</a></p>
 
-
 <h4>Gyűjtések</h4>
-<p><a href="/savings/new">[Új gyűjtés létrehozása]</a></p>
+<p>{% if isSupervisor == true %}<a href="/savings/new">[Új gyűjtés létrehozása]</a>{%endif%}</p>
 {% if savings.length > 0 %}
     {% for s in savings | sort(true,true,'created_at') %}
         <a href="/savings/{{s.id}}"><b>{{s.name}}</b></a> {% if s.is_fulfilled%} [TELJESÍTVE] {%endif%} <br>
