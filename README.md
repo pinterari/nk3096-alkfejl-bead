@@ -4,7 +4,7 @@
 ## 1. Követelményanalízis
 
 ### 1.1 Célkitűzés
-A program főbb céljai közé tartozik, hogy a felhasználók könnyen nyomon követhessék, hogy mire költenek; ellenőrzihessék gyermekeik kiadásait, valamint a családok, lakótársak, baráti társaságok megtervezhessék jövőbeli komolyabb közös kiadásaikat. Az alkalmazás ezen funkciói csak bejelentkezett felhasználóknak elérhetőek. Lehetőség van teljes jogú userként való regisztrációra, valamint csoportba történő regisztrációval is bővülhet a felhasználók tábora, legyen szó teljes vagy akár korlátozott jogkorű userről.
+A program főbb céljai közé tartozik, hogy a felhasználók könnyen nyomon követhessék, hogy mire költenek; ellenőrzihessék gyermekeik kiadásait, valamint a családok, lakótársak, baráti társaságok megtervezhessék jövőbeli komolyabb közös kiadásaikat. Az alkalmazás ezen funkciói csak bejelentkezett felhasználóknak elérhetőek. Regisztráció után lehetőség van csoportok létrehozására, a csoportokon belül pedig teljes vagy korlátozott jogkörű userek szerepelnek.
 
 ###### Funckionális követelmények
 - Regisztráció
@@ -44,3 +44,68 @@ A program főbb céljai közé tartozik, hogy a felhasználók könnyen nyomon k
   - Kategória kiválasztása
   - Opcionális esetben komment írása
 4. A hozzáadás gombra kattintva a kiadás hozzáadódik a felhasználó tételeihez, majd a felhasználót átirányítjuk a tételeket listázó oldalra
+
+## 2. Tervezés
+
+### 2.1 
+
+### 2.2 Oldaltérkép
+
+##### Publikus
+- Belépés
+- Regisztráció
+- Felhasználók keresése
+- Felhasználók profiljának megtekintése
+
+##### Bejelentkezett
+- Kiadások listázása
+- Új kiadás
+- Saját csoportok listázása
+    - Új csoport létrehozása
+- Csoport megtekintése
+    - Kilépés a csoportból
+    - *Új tag hozzáadása a csoporthoz*
+    - *Új gyűjtés létrehozása*
+- Saját gyűjtések listázása
+    - *Új gyűjtés létrehozása*
+- Gyűjtés megtekintése
+    - Hozzájárulás
+    - Saját hozzájárulás törlése
+    - *Gyűjtés törlése*
+- Kijelentkezés
+
+A dőlten szedett funckiók csak az adott csoport teljes jogkörű felhasználói számára elérhetőek.
+
+### 2.3 Végpontok
+| Metódus | Cím | Funkció|
+|:-------:|:---:|--------|
+|GET|/|Főoldal
+|GET|/signup|Regisztrációs oldal megjelenítése
+|POST|/signup|Regisztráció
+|GET|/login|Bejelentkező oldal megjelenítése
+|POST|/login|Bejelentkezés
+|GET|/logout|Kijelentkezés
+|GET|/expenses|Saját adott havi kiadások listázása
+|POST|/expenses|Saját választott havi kiadások listázása
+|GET|/expenses/new|Új kiadás hozzáadása oldal megjelenítése
+|POST|/expenses/new|Új kiadás hozzáadása
+|GET|/expenses/:id/delete|Adott azonosítójú kiadás törlése
+|GET|/profile|Saját profil megtekintése
+|GET|/profile-edit|Saját profil módosítása oldal megjelenítése
+|POST|/profile-edit|Saját profil módosítása
+|GET|/profile/:username|Adott felhasználónevű user profiljának megjelenítése
+|GET|/search|Keresés
+|GET|/teams|Saját csoportok listázása
+|GET|/teams/new|Új csoport létrehozása oldal megjelenítése
+|POST|/teams/new|Új csoport létrehozása
+|GET|/teams/:id|Választott azonosítójú csoport megtekintése
+|GET|/teams/:id/quit|Kilépés a választott azonosítójú csoportból
+|GET|/teams/:id/newmember|Új tag hozzáadása adott azonosítójú csoporthoz oldal megjelenítése
+|POST|/teams/:id/newmember|Új tag hozzádása adott azonosítójú csoporthoz
+|GET|/savings|Saját gyűjtések listázása
+|GET|/savings/:id|Adott azonosítójú gyűjtés megtekintése
+|GET|/savings/new|Új gyűjtés létrehozása oldal megjelenítése
+|POST|/savings/new|Új gyűjtés létrehozása
+|POST|/savings/:id|Hozzájárulás adott azonosítójú gyűjtéshez
+|GET|/savings/:id/delete|Adott azonosítójű gyűjtés törlése
+|GET|/funds/:id/delete|Adott azonosítójű hozzájárulás törlése
