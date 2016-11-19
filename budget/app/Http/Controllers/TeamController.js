@@ -92,6 +92,86 @@ class TeamController {
             savings: savings
         });
     }
+
+    * newMember (req, res) {
+        if(!req.currentUser) { res.unauthorized('Access denied'); return }
+
+        const u = yield User.all(); var users = u.toJSON();
+        const id = req.param('id');
+        const team = yield Team.find(id);
+        const members = yield TeamMember.query().where('team_id', id);
+
+        var canAdd = false;
+        for(var i = 0; i < members.length; i++) {
+            if(members[i].username == req.currentUser.username && members[i].is_supervisor) {
+                canAdd = true; break;
+            }
+        }
+
+        if(canAdd) {
+            var availableUsers = [];
+            for(var i = 0; i < users.length; i++) {
+                var isMember = false;
+                for(var j = 0; j < members.length; j++) {
+                    if(members[j].team_id == id && users[i].username == members[j].username) {isMember = true; break}
+                }
+                if(!isMember) availableUsers.push(users[i]);
+            }
+
+            yield res.sendView('newmember', {
+                users: availableUsers,
+                team: team
+            });
+        } else {
+            res.redirect('back'); return
+        }
+    }
+
+    * makeNewMember (req, res) {
+        var post = req.post(); const id = req.param('id');
+        console.log('post', post);
+
+        var memberData = { username: post.member, isSupervisor: post.isSupervisor };
+        const rules = { username: 'required', isSupervisor: 'required' }
+        const validation = yield Validator.validateAll(memberData, rules);
+        if(validation.fails()){
+            yield req
+                .withAll()
+                .andWith({ errors: validation.messages() })
+                .flash()
+            res.redirect('back')
+            return
+        }
+
+        const user = yield User.findBy('username', memberData.username);
+        console.log("user ", user);
+
+        const member = yield TeamMember.create({
+            team_id : id,
+            username: memberData.username,
+            is_supervisor: memberData.isSupervisor
+        });
+        member.save();
+
+        res.redirect('/teams/'+id);
+    }
+
+    * quit (req, res) {
+        if(!req.currentUser) { res.unauthorized('Access denied'); return }
+        const teamID = req.param('id');
+
+        const member = yield TeamMember.query().where('username',req.currentUser.username);
+        var isMember = false;
+        var memberID = -1;
+        for(var i = 0; i < member.length; i++) {
+            if(teamID == member[i].team_id) { isMember = true; memberID = member[i].id;  break; }
+        }
+        if(isMember){
+            const user = yield TeamMember.find(memberID);
+            yield user.delete();
+            res.redirect('/');
+        } else { res.redirect('/'); return }
+    }
 }
 
 module.exports = TeamController;

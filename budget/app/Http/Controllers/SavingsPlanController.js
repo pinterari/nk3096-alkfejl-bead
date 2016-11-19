@@ -159,11 +159,12 @@ class SavingsPlanController {
         if(!req.currentUser) { res.unauthorized('Access denied'); return }
         const id = req.param('id');
         const plan = yield SavingsPlan.find(id);
+        const team_id = plan.attributes.team_id
         const member = yield TeamMember.query().where('username',req.currentUser.username);
 
         var canDelete = false;
         for(var i = 0; i < member.length; i++) {
-            if(member[i].team_id == plan.attributes.team_id && member[i].is_supervisor) {
+            if(member[i].team_id == team_id && member[i].is_supervisor) {
                 canDelete = true; break;
             }
         }
@@ -175,7 +176,7 @@ class SavingsPlanController {
                 yield fund.delete();
             }
             yield plan.delete();
-            res.redirect('back');
+            res.redirect('/teams/'+team_id);
         } else {
             res.redirect('back'); return
         }

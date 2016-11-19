@@ -1,0 +1,53 @@
+{% extends 'parent' %}
+
+{% block content %}
+
+<h1> Új tag hozzáadása - {{team.name}} csapat </h1>
+
+        <ul>
+        {% for error in old('errors') %}
+            <li>{{error.message}}</li>
+        {% endfor %}
+        </ul>
+
+        <form class = "form-horizontal" method="POST">
+            <fieldset>
+                {{ csrfField }}
+
+                 <div class="form-group">
+                    <label for="member" name="member" class="col-lg-2 control-label">Felhasználó</label>
+                    <div class="col-lg-10">
+                        <select class="form-control" id="member" name="member">
+                            {% for user in users | sort(false,true,'username') %}
+                            <option value="{{user.username}}">{{user.username}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label" for="isSupervisor" name="isSupervisor">Jogkör</label>
+                    <div class="col-lg-10">
+                        <div class="radio">
+                        <label>
+                            <input type="radio" name="isSupervisor" id="isSupervisor1" value="true" checked="">
+                            Teljes
+                        </label>
+                        </div>
+                        <div class="radio">
+                        <label>
+                            <input type="radio" name="isSupervisor" id="isSupervisor2" value="false">
+                            Korlátozott
+                        </label>
+                        </div>
+                    </div>
+                    </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Mehet</button>
+                </div>
+            </fieldset>
+        </form> 
+    </div>
+
+{% endblock %}
