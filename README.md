@@ -10,13 +10,13 @@ A program főbb céljai közé tartozik, hogy a felhasználók könnyen nyomon k
 - Regisztráció
 - Bejelentkezés
 - Bejelentkezett felhasználóként elérhető funkciók:
-    - Saját kiadások, bevételek menedzselése (megtekintés, hozzáadás, módosítás, törlés)
+    - Saját kiadások, bevételek menedzselése (megtekintés, hozzáadás, törlés)
     - Saját csoportok megtekintése
     - Saját csoportok gyűjtéseinek megtekintése, hozzájárulás
     - Profiladatok megtekintése, szerkesztése
+    - Csoportok létrehozása, kilépés a csoportból
 - Kizárólag teljes jogkörű userként használható funckiók:
-    - Csoportok létrehozása, módosítása, törlése
-    - Gyűjtés indítása, módosítása, teljesítettnek jelölése, törlése
+    - Gyűjtés indítása
     - Felhasználók meghívása a saját csoportokba teljes vagy korlátozott jogkörű userként
     - Csoport korlátozott jogkörű tagjainak kiadásainak megtekintése
     
@@ -30,7 +30,7 @@ A program főbb céljai közé tartozik, hogy a felhasználók könnyen nyomon k
 ###### Felhasználói szerepkörök
 - **Vendég**: Nem bejelentkezett felhasználó; számára csak a publikus oldalak érhetőek el: a bejelentkezés, a regisztráció és az oldal tematikáját leíró főoldal
 - **Teljes jogkörű felhasználó**, *"Nagykorú"*: Létrehozhat csoportokat, gyűjtéseket és kezelheti őket; meghívhat felhasználókat a csoportjaiba; a csoportjaiban szereplő kiskorúak kiadásait is megnézheti
-- **Korlátozott jogkörű felhasználó**, *"Kiskorú"*: Saját kiadásait, bevételeit kezelheti, de csoportokat illetve gyűjtéseket nem tud létrehozni, módosítani, törölni.
+- **Korlátozott jogkörű felhasználó**, *"Kiskorú"*: Saját kiadásait, bevételeit kezelheti, de a csoportba nem hívhat meg tagokat, nem hozhat létre gyűjtéseket.
 
 ###### Use Case Diagram
 ![Use Case Diagram](docs/images/usecase.png)
