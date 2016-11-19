@@ -4,6 +4,7 @@ const User = use('App/Model/User')
 const Team = use('App/Model/Team');
 const TeamMember = use('App/Model/TeamMember');
 const SavingsPlan = use('App/Model/SavingsPlan');
+const AllocatedFunds = use('App/Model/AllocatedFund');
 const Validator = use('Validator');
 
 class TeamController {
@@ -84,7 +85,6 @@ class TeamController {
         }
 
         const savings = yield SavingsPlan.query().where('team_id', teamID);
-        console.log("savings ", savings);
 
         yield res.sendView('team', {
             team: team,
@@ -169,8 +169,52 @@ class TeamController {
         if(isMember){
             const user = yield TeamMember.find(memberID);
             yield user.delete();
+
+            const others = yield TeamMember.query().where('team_id', teamID);
+            if(others.length == 0) {
+                const team = yield Team.find(teamID);
+                yield team.delete();
+
+                const plans = yield SavingsPlan.query().where('team_id', teamID);
+                for(var j = plans.length-1; j >= 0; j--) {
+                    const funds = yield AllocatedFunds.query().where('plan_id', plans[j].id);
+                    for(var i = funds.length-1; i >= 0; i--) {
+                        const fund = yield AllocatedFunds.find(funds[i].id);
+                        yield fund.delete();
+                    }
+                    const p = yield SavingsPlan.find(plans[j].id);
+                    yield p.delete();
+                }
+            }
+
             res.redirect('/');
         } else { res.redirect('/'); return }
+    }
+
+    * showOwnTeams(req,res) {
+        if(!req.currentUser) { res.unauthorized('Access denied'); return }
+
+        const membership = yield TeamMember.query().where('username', req.currentUser.username);
+        const team_members = yield TeamMember.with('teams');
+        const allteams = yield Team.with('team_members');
+        var teammates = [];
+        var teams = [];
+
+        for(var j = 0; j < membership.length; j++) {
+             for(var i = 0; i < team_members.length; i++) {
+                if(team_members[i].team_id == membership[j].team_id)
+                    teammates.push(team_members[i]);
+            }
+            for(var k = 0; k < allteams.length; k++) {
+                if(allteams[k].id == membership[j].team_id)
+                    teams.push(allteams[k])
+            }  
+        }
+
+        yield res.sendView('ownteams', {
+            teams: teams,
+            teammates: teammates
+        });
     }
 }
 

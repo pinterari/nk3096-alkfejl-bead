@@ -182,6 +182,31 @@ class SavingsPlanController {
         }
     }
 
+    * showOwnPlans(req, res){
+        if(!req.currentUser) { res.unauthorized('Access denied'); return }
+
+        const userTeams = yield TeamMember.query().where('username', req.currentUser.username);
+        const allTeams = yield Team.with('team_members');
+        var teams = [];
+        var savings = [];
+        for(var i = 0; i < userTeams.length; i++) {
+            for(var j = 0; j < allTeams.length; j++) {
+                if(userTeams[i].team_id == allTeams[j].id) {
+                    teams.push(allTeams[j]); break;
+                }
+            }
+            const plans = yield SavingsPlan.query().where('team_id', userTeams[i].team_id);
+            for(var k = 0; k < plans.length; k++) {
+                savings.push(plans[k]);
+            }
+        }
+
+        yield res.sendView('ownplans', {
+            teams: teams,
+            savings: savings
+        });
+    }
+
 }
 
 module.exports = SavingsPlanController;

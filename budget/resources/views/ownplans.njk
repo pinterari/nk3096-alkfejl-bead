@@ -1,0 +1,26 @@
+{% extends 'parent' %}
+
+{% block content %}
+
+{% for team in teams | sort(false,true,'name') %}
+
+    <h3>{{team.name}}</h3>
+
+    {% if savings.length > 0 %}
+        {% for s in savings | sort(true,true,'created_at') %}
+            {% if s.team_id == team.id %}
+            <a href="/savings/{{s.id}}"><b>{{s.name}}</b></a> {% if s.is_fulfilled%} [TELJESÍTVE] {%endif%} <br>
+            Kitűzött cél: {{s.goal}} Ft <br>
+            Jelenlegi összeg: {{s.current}} Ft <br>
+            <div class="progress">
+                <div class="progress-bar {% if s.is_fulfilled%}progress-bar-success{%endif%}" style="width: {{s.current/s.goal*100}}%;"></div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+{% endfor %}
+
+<p><a href="/savings/new">[Új gyűjtés létrehozása]</a></p>
+
+{% endblock %}

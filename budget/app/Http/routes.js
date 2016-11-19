@@ -24,11 +24,13 @@ Route.get('/search', 'UserController.search');
 
 Route.get('/teams/new', 'TeamController.makeNew');
 Route.post('/teams/new', 'TeamController.doMakeNew');
+Route.get('/teams', 'TeamController.showOwnTeams');
 Route.get('/teams/:id', 'TeamController.showTeam');
 Route.get('/teams/:id/quit', 'TeamController.quit');
 Route.get('/teams/:id/newmember', 'TeamController.newMember');
 Route.post('/teams/:id/newmember', 'TeamController.makeNewMember');
 
+Route.get('/savings', 'SavingsPlanController.showOwnPlans');
 Route.get('/savings/new', 'SavingsPlanController.makeNew');
 Route.post('/savings/new', 'SavingsPlanController.doMakeNew');
 Route.get('/savings/:id', 'SavingsPlanController.show');
