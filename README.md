@@ -47,9 +47,7 @@ A program főbb céljai közé tartozik, hogy a felhasználók könnyen nyomon k
 
 ## 2. Tervezés
 
-### 2.1 
-
-### 2.2 Oldaltérkép
+### 2.1 Oldaltérkép
 
 ##### Publikus
 - Belépés
@@ -76,7 +74,7 @@ A program főbb céljai közé tartozik, hogy a felhasználók könnyen nyomon k
 
 A dőlten szedett funckiók csak az adott csoport teljes jogkörű felhasználói számára elérhetőek.
 
-### 2.3 Végpontok
+### 2.2 Végpontok
 | Metódus | Cím | Funkció|
 |:-------:|:---:|--------|
 |GET|/|Főoldal
@@ -110,7 +108,7 @@ A dőlten szedett funckiók csak az adott csoport teljes jogkörű felhasználó
 |GET|/savings/:id/delete|Adott azonosítójű gyűjtés törlése
 |GET|/funds/:id/delete|Adott azonosítójű hozzájárulás törlése
 
-### 2.4 Oldalvázlatok
+### 2.3 Oldalvázlatok
 ###### Bejelentkezés
 ![Bejelentkezés](docs/images/bejel.png)
 ###### Regisztráció:
@@ -126,5 +124,5 @@ A dőlten szedett funckiók csak az adott csoport teljes jogkörű felhasználó
 ###### Gyűjtés oldala
 ![Gyűjtés oldala](docs/images/gyujtes.png)
 
-### 2.5 Adatmodell 
+### 2.4 Adatmodell 
 ![Adatmodell](docs/images/adatmodell.png)
