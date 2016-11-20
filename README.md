@@ -109,3 +109,19 @@ A dőlten szedett funckiók csak az adott csoport teljes jogkörű felhasználó
 |POST|/savings/:id|Hozzájárulás adott azonosítójú gyűjtéshez
 |GET|/savings/:id/delete|Adott azonosítójű gyűjtés törlése
 |GET|/funds/:id/delete|Adott azonosítójű hozzájárulás törlése
+
+### 2.4 Oldalvázlatok
+###### Bejelentkezés
+![Bejelentkezés](docs/images/bejel.png)
+###### Regisztráció:
+![Regisztráció](docs/images/reg.png)
+###### Kiadások
+![Kiadások](docs/images/kiad.png)
+###### Új kiadás
+![Új kiadás](docs/images/ujkiad.png)
+###### Csapatok
+![Csapatok](docs/images/csapatok.png)
+###### Gyűjtések
+![Gyűjtések](docs/images/gyujtesek.png)
+###### Gyűjtés oldala
+![Gyűjtés oldala](docs/images/gyujtes.png)
