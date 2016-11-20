@@ -125,3 +125,6 @@ A dőlten szedett funckiók csak az adott csoport teljes jogkörű felhasználó
 ![Gyűjtések](docs/images/gyujtesek.png)
 ###### Gyűjtés oldala
 ![Gyűjtés oldala](docs/images/gyujtes.png)
+
+### 2.5 Adatmodell 
+![Adatmodell](docs/images/adatmodell.png)
