@@ -139,4 +139,6 @@ Funkcionális tesztelés során az oldal funkcióinak működését ellenőrizz�
 - Selenium bővítmény elindítása
 - Tesztesetek betöltése (Fájl > Open Test Suite)
 
-
+#### 4.3 Tesztesetek
+- Regisztráció: `signup.test`
+- Új kiadás hozzáadása: `newexpense.test`
