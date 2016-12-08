@@ -126,3 +126,17 @@ A dőlten szedett funckiók csak az adott csoport teljes jogkörű felhasználó
 
 ### 2.4 Adatmodell 
 ![Adatmodell](docs/images/adatmodell.png)
+
+## 4. Tesztelés
+
+### 4.1 Tesztelési környezet
+Funkcionális tesztelés során az oldal funkcióinak működését ellenőrizzük, mint például hogy valóban az elvárt viselkedés megy-e végbe, megfelelően megjelennek-e az oldalak a végpontokon, vagy hibás bemeneti adatok esetén tényleg megkapjuk-e a várt hibaüzeneteket. A program tesztelésére a [Selenium IDE](http://www.seleniumhq.org/projects/ide/ "Selenium IDE oldala")-t használjuk, ami lehetővé teszi, hogy grafikusan futtassunk és hozzunk létre teszteket. 
+
+### 4.2 Környezet telepítése
+- A legfrissebb [Firefox](https://www.mozilla.org/en-US/firefox/new/ "Firefox letöltése") böngésző letöltése
+- A [Selenium IDE](https://addons.mozilla.org/hu/firefox/addon/selenium-ide/) Firefox bővítmény letöltése, hozzáadása a böngészőhöz
+- Böngésző újraindítása
+- Selenium bővítmény elindítása
+- Tesztesetek betöltése (Fájl > Open Test Suite)
+
+
