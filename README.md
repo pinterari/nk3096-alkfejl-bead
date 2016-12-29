@@ -127,6 +127,23 @@ A dőlten szedett funckiók csak az adott csoport teljes jogkörű felhasználó
 ### 2.4 Adatmodell 
 ![Adatmodell](docs/images/adatmodell.png)
 
+## 3. Szerveroldali JavaScript fejlesztés
+
+###3.1 Keresőmező (AJAX)
+A fejlécen található keresőmező felokosítása; a beírt "töredék" alapján lévő első 5 találat listázása a keresőmező alatt a gyorsabb elérés érdekében.
+- Érintett fájlok: `Http/routes.js`, `Http/Controllers/UserController.js`
+- Új fájlok: `public/search.js`, `public/search.css`
+
+###3.2 Bejelentkezés (AJAX)
+A bejelentkezés ezentúl egy felugró ablakban történik meg az új oldal helyett.
+- Érintett fájlok: `Http/routes.js`, `Http/Controllers/UserController.js`
+- Új fájlok: `public/login.js`
+
+###3.3 Kilépés a csoportból (AJAX)
+Ha a felhasználó ki akar lépni egy csoportból, egy felugró ablakban kérjük meg, hogy erősítse meg kilépési szándékát.
+- Érintett fájlok: `Http/routes.js`, `Http/Controllers/TeamController.js`
+- Új fájlok: `public/quitTeam.js`
+
 ## 4. Tesztelés
 
 ### 4.1 Tesztelési környezet
