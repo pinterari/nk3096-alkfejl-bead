@@ -11,7 +11,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.hu.min.js"></script>
 
-  <link rel="icon" href="/assets/favicon.png" type="image/x-icon">
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" type="text/css" href="style.css">
   <link rel="stylesheet" type="text/css" href="search.css">
 
@@ -51,6 +51,7 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
+              <li><img src="/assets/favicon.ico" style="height:50px"></li>
             {% if currentUser %}
               <li><a href="/profile">Szia, {{ currentUser.username }}!</a></li>
               <li><a href="/logout">Kilépés</a></li>
