@@ -13,6 +13,11 @@
 
   <link rel="icon" href="/assets/favicon.png" type="image/x-icon">
   <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="search.css">
+
+  <script src="/search.js"></script>
+  {% block scripts %}{% endblock %}
+
 </head>
 <body>
 
@@ -28,22 +33,22 @@
             <a class="navbar-brand" href="/">Budget</a>
             </div>
 
+           <form id = "search" action = "/search" method = "GET" class = "navbar-form navbar-left">
+                <div class="form-group">
+                <input type="text" class="form-control" name="query" autocomplete="off" placeholder="Felhasználó keresése">
+                </div>
+                <button type="submit" class="btn btn-primary">Mehet</button>
+            </form>
+
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-            {%if currentUser%}
+            {% if currentUser %}
                 <li><a href="/expenses">Kiadások</a></li>
                 <li><a href="/expenses/new">Új tétel</a></li>
                 <li><a href="/teams">Csoportjaid</a></li>
                 <li><a href="/savings">Gyűjtéseid</a><li>
             {% endif %}
             </ul>
-
-            <form class="navbar-form navbar-left"  action="/search" method="GET">
-                <div class="form-group">
-                <input type="text" class="form-control" name="query" placeholder="Felhasználó keresése">
-                </div>
-                <button type="submit" class="btn btn-primary">Mehet</button>
-            </form>
 
             <ul class="nav navbar-nav navbar-right">
             {% if currentUser %}
@@ -55,7 +60,10 @@
             {% endif %}
           </ul>
         </div>
+        
     </nav>
+
+<div class="list-group suggestions"></div>
 
 <div class = "container" >
 

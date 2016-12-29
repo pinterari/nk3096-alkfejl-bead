@@ -21,6 +21,9 @@ Route.post('/profile-edit', 'ProfileController.doEditProfile');
 Route.get('/profile', 'ProfileController.ownProfile');
 
 Route.get('/search', 'UserController.search');
+Route.group('ajax', function(){
+    Route.get('/search', 'UserController.ajaxSearch')
+}).prefix('/ajax');
 
 Route.get('/teams/new', 'TeamController.makeNew');
 Route.post('/teams/new', 'TeamController.doMakeNew');

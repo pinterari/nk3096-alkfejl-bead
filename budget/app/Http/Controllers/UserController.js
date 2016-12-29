@@ -87,6 +87,19 @@ class UserController {
         yield req.auth.logout(); res.redirect('/');
     }
 
+    * ajaxSearch(req, res) {
+        var wanted = req.input('query') || '';
+        var page = Math.max(req.input('page'),1);
+
+        var users = yield User.query()
+            .where(function(){
+                if(wanted != '') this.where('username', 'LIKE', `%${wanted}%`)
+            })
+            .paginate(page, 5);
+
+        res.ok(users);
+    }
+
     * search (req, res) {
         var wanted = req.input('query') || '';
         var page = Math.max(req.input('page'),1);
