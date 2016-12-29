@@ -1,19 +1,28 @@
 {% extends 'parent' %}
 
 {% block content %}
- <!-- <div>
-      {% for category in categories %}
-        {{category.name}}
-        <div>
-            {% for expense in category.expenses %}
-            <li class="list-group-item">
-               {{expense.date}} | {{ expense.username }} - {{expense.amount}} Ft ({{expense.comment}})
-            </li>
-            {% endfor %}
-        </div>
-      {% endfor %}
-  </div>-->
 
-FŐOLDAL
+<h1>FŐOLDAL</h1>
+
+<p class="long">A honlap főbb céljai közé tartozik, hogy a felhasználók könnyen 
+nyomon követhessék, hogy mire költenek; ellenőrzihessék gyermekeik 
+kiadásait, valamint a családok, lakótársak, baráti társaságok 
+megtervezhessék jövőbeli komolyabb közös kiadásaikat. 
+Az alkalmazás ezen funkciói csak bejelentkezett felhasználóknak 
+elérhetőek. Regisztráció után lehetőség van csoportok létrehozására, 
+a csoportokon belül pedig teljes vagy korlátozott jogkörű userek 
+szerepelnek.</p>
+
+{% if currentUser == null %}
+<p>Kérlek, jelentkezz be a funkciók használatához! </p>
+{% endif %}
+
+<p>
+  <b>Pintér Arianna (NK3096) </b> <br>
+  <a href="https://github.com/pinterari/nk3096-alkfejl-bead" target="_blank">
+    <img class="logo" src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Logo.png">
+  </a>
+  
+</p>
 
 {% endblock %}
