@@ -23,6 +23,7 @@ Route.get('/profile', 'ProfileController.ownProfile');
 Route.get('/search', 'UserController.search');
 Route.group('ajax', function(){
     Route.get('/search', 'UserController.ajaxSearch')
+    Route.post('/login', 'UserController.ajaxLogin')
 }).prefix('/ajax');
 
 Route.get('/teams/new', 'TeamController.makeNew');
