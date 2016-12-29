@@ -168,6 +168,41 @@ class TeamController {
         } else { res.redirect('/'); return }
     }
 
+    * ajaxQuit(req, res) {
+        if(!req.currentUser) { res.unauthorized('Access denied'); return }
+        const teamID = req.param('id');
+
+        const member = yield TeamMember.query().where('username',req.currentUser.username);
+        var isMember = false;
+        var memberID = -1;
+        for(var i = 0; i < member.length; i++) {
+            if(teamID == member[i].team_id) { isMember = true; memberID = member[i].id;  break; }
+        }
+        if(isMember){
+            const user = yield TeamMember.find(memberID);
+            yield user.delete();
+
+            const others = yield TeamMember.query().where('team_id', teamID);
+            if(others.length == 0) {
+                const team = yield Team.find(teamID);
+                yield team.delete();
+
+                const plans = yield SavingsPlan.query().where('team_id', teamID);
+                for(var j = plans.length-1; j >= 0; j--) {
+                    const funds = yield AllocatedFunds.query().where('plan_id', plans[j].id);
+                    for(var i = funds.length-1; i >= 0; i--) {
+                        const fund = yield AllocatedFunds.find(funds[i].id);
+                        yield fund.delete();
+                    }
+                    const p = yield SavingsPlan.find(plans[j].id);
+                    yield p.delete();
+                }
+            }
+            yield res.ok({message:'OK!'});
+            
+        } else { res.redirect('/'); return }
+    }
+
     * showOwnTeams(req,res) {
         if(!req.currentUser) { res.unauthorized('Access denied'); return }
 

@@ -58,7 +58,17 @@
                         {{exp.comment}}
                     {% endif %}
                 </td>
-                <td align="center"><a href="/expenses/{{exp.id}}/delete">[X]</a></td>
+                <td align="center"><a href="/expenses/{{exp.id}}/delete"><img src="/assets/delete.png" style="height:20px"></a></td>
+               <!-- <td align="center">
+                    
+                    <form id="torol" action="/expenses/{{exp.id}}/delete" method="POST">
+                        {{ csrfField }}
+                        <img src="/assets/delete.png" style="height:20px">
+                        <input type="submit" class="btn btn-sm btn-danger" value="Törlés"/>
+                    </form>-->
+
+                </td> 
+
             </tr>
         {% endif %}
     {% endfor %}

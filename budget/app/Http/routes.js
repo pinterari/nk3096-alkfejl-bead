@@ -21,10 +21,6 @@ Route.post('/profile-edit', 'ProfileController.doEditProfile');
 Route.get('/profile', 'ProfileController.ownProfile');
 
 Route.get('/search', 'UserController.search');
-Route.group('ajax', function(){
-    Route.get('/search', 'UserController.ajaxSearch')
-    Route.post('/login', 'UserController.ajaxLogin')
-}).prefix('/ajax');
 
 Route.get('/teams/new', 'TeamController.makeNew');
 Route.post('/teams/new', 'TeamController.doMakeNew');
@@ -42,3 +38,9 @@ Route.get('/savings/:id', 'SavingsPlanController.show');
 Route.post('/savings/:id', 'SavingsPlanController.newAllocatedFund');
 Route.get('/savings/:id/delete', 'SavingsPlanController.deletePlan');
 Route.get('/funds/:id/delete', 'SavingsPlanController.deleteFund');
+
+Route.group('ajax', function(){
+    Route.get('/search', 'UserController.ajaxSearch')
+    Route.post('/login', 'UserController.ajaxLogin')
+    Route.post('/teams/:id/quit', 'TeamController.ajaxQuit')
+}).prefix('/ajax');

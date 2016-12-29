@@ -1,5 +1,9 @@
 {% extends 'parent' %}
 
+{% block scripts %}
+<script src="/quitTeam.js"></script>
+{% endblock %}
+
 {% block content %}
 
 <h3>{{team.name}}</h3>
@@ -11,7 +15,12 @@
 </ul>
 
 <p>{% if isSupervisor == true %}<a href="/teams/{{team.id}}/newmember">[Új tag felvétele]</a> {%endif%}
-<a href="/teams/{{team.id}}/quit">[Kilépés a csapatból]</a></p>
+<!--<a href="/teams/{{team.id}}/quit">[Kilépés a csapatból]</a>-->
+<form id="quit" action="/teams/{{team.id}}/quit" method="POST">
+    {{ csrfField }}
+    <input type="submit" class="btn btn-sm btn-danger" value="Kilépés a csoportból"/>
+</form>
+</p>
 
 <h4>Gyűjtések</h4>
 <p>{% if isSupervisor == true %}<a href="/savings/new">[Új gyűjtés létrehozása]</a>{%endif%}</p>
@@ -25,5 +34,19 @@
         </div>
     {% endfor %}
 {% endif %}
+
+<div class="modal fade confirm-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+        <div class="modal-body">
+            Biztosan ki szeretnél lépni a csoportból?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success modal-ok" data-dismiss="modal">OK</button>
+            <button type="button" class="btn btn-danger modal-cancel" data-dismiss="modal">Mégse</button>
+        </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
