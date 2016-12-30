@@ -163,7 +163,30 @@ Funkcionális tesztelés során az oldal funkcióinak működését ellenőrizz�
 - Regisztráció: `signup.test`
 - Új kiadás hozzáadása: `newexpense.test`
 
-## 5. Függelék
+## 5. Felhasználói dokumentáció
+
+### 5.1 Minimális rendszerkövetelmény:
+- Pentium 4 vagy újabb processzor
+- 512MB RAM
+- 200MB hely a merevlemezen
+
+### 5.2 Szükséges szoftverek:
+- [nodeJS](https://nodejs.org/en/)
+- [npm](https://www.npmjs.com/)
+- internetes böngésző (pl. [Google Chrome](https://www.google.com/chrome/browser/index.html))
+- IDE a szerkesztéshez (pl. [Visual Studio Code](https://code.visualstudio.com/))
+
+### 5.3 Telepítés
+1. Kód letöltése
+    - ZIP letöltése vagy
+    - `pinterari/nk3096-alkfejl-bead` klónozása vagy
+    - `pinterari/nk3096-alkfejl-bead` forkolása és a saját repository klónozása
+2. `npm install`
+3. `.env.example` fájl átnevezése `.env`-re
+4. futtatás `npm run` vagy `npm run dev` (fejlesztői mód) paranccsal
+5. `http://localhost:3333` megnyitása
+
+## 6. Függelék
 - szekvencia diagram: [WebSequenceDiagrams](https://www.websequencediagrams.com/)
 - use case diagram, adatmodell diagram: [nomoml](http://nomnoml.com/)
 - oldalvázlatok: [Lumzy](http://lumzy.com/app/)
