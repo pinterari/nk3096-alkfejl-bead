@@ -151,6 +151,11 @@ Ha a felhasználó ki akar lépni egy csoportból, egy felugró ablakban kérjü
 A fejlesztés előtt a felhasználó csak a regisztrációs kérelem elküldése után tudta meg, ha hibás adatokkal próbált regisztrálni, ezentúl viszont a [Bootstrap Validatior](https://1000hz.github.io/bootstrap-validator/) plugin segítségével valós időben, már a kliens oldalon megtörténik a validáció első lépése.
 - Módosított fájlok: `resources/views/signup.njk`
 
+###3.5 Hónapnév mutatása a költségek listázásánál
+Eddig a felhasználó a választott havi költségek listázásánál a kezdő- és végpont idejét (+1 nap) látta, pl. 2016-12-01 - 2017-01-01. A funkció ezt cseréli ki az aktuális évre és a hónap magyar nevére az átláthatóság kedvéért.
+- Módosított fájlok: `resources/views/expenses.njk`
+- Új fájlok: `public/getMonth.js`
+
 ## 4. Tesztelés
 
 ### 4.1 Tesztelési környezet
