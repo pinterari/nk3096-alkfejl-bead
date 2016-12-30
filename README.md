@@ -151,6 +151,11 @@ Ha a felhasználó ki akar lépni egy csoportból, egy felugró ablakban kérjü
 A fejlesztés előtt a felhasználó csak a regisztrációs kérelem elküldése után tudta meg, ha hibás adatokkal próbált regisztrálni, ezentúl viszont a [Bootstrap Validatior](https://1000hz.github.io/bootstrap-validator/) plugin segítségével valós időben, már a kliens oldalon megtörténik a validáció első lépése.
 - Módosított fájlok: `resources/views/signup.njk`
 
+###3.5 Hónapnév mutatása a költségek listázásánál
+Eddig a felhasználó a választott havi költségek listázásánál a kezdő- és végpont idejét (+1 nap) látta, pl. 2016-12-01 - 2017-01-01. A funkció ezt cseréli ki az aktuális évre és a hónap magyar nevére az átláthatóság kedvéért.
+- Módosított fájlok: `resources/views/expenses.njk`
+- Új fájlok: `public/getMonth.js`
+
 ## 4. Tesztelés
 
 ### 4.1 Tesztelési környezet
@@ -163,9 +168,11 @@ Funkcionális tesztelés során az oldal funkcióinak működését ellenőrizz�
 - Selenium bővítmény elindítása
 - Tesztesetek betöltése (Fájl > Open Test Suite)
 
-#### 4.3 Tesztesetek
+### 4.3 Tesztesetek
 - Regisztráció: `signup.test`
 - Új kiadás hozzáadása: `newexpense.test`
+- Profil szerkesztése: `editprofile.test`
+- Csoport létrehozása és tag hozzáadása: `team.test`
 
 ## 5. Felhasználói dokumentáció
 
@@ -177,7 +184,7 @@ Funkcionális tesztelés során az oldal funkcióinak működését ellenőrizz�
 ### 5.2 Szükséges szoftverek:
 - [nodeJS](https://nodejs.org/en/)
 - [npm](https://www.npmjs.com/)
-- internetes böngésző (pl. [Google Chrome](https://www.google.com/chrome/browser/index.html))
+- Internetes böngésző (pl. [Google Chrome](https://www.google.com/chrome/browser/index.html))
 - IDE a szerkesztéshez (pl. [Visual Studio Code](https://code.visualstudio.com/))
 
 ### 5.3 Telepítés
@@ -187,13 +194,13 @@ Funkcionális tesztelés során az oldal funkcióinak működését ellenőrizz�
     - `pinterari/nk3096-alkfejl-bead` forkolása és a saját repository klónozása
 2. `npm install`
 3. `.env.example` fájl átnevezése `.env`-re
-4. futtatás `npm run` vagy `npm run dev` (fejlesztői mód) paranccsal
+4. Futtatás `npm run` vagy `npm run dev` (fejlesztői mód) paranccsal
 5. `http://localhost:3333` megnyitása
 
 ## 6. Függelék
-- szekvencia diagram: [WebSequenceDiagrams](https://www.websequencediagrams.com/)
-- use case diagram, adatmodell diagram: [nomoml](http://nomnoml.com/)
-- oldalvázlatok: [Lumzy](http://lumzy.com/app/)
-- datepicker: [Bootstrap Datepicker](https://bootstrap-datepicker.readthedocs.io/en/latest/)
-- template: [Cosmo from Bootswatch](https://bootswatch.com/)
-- favicon: [Icons8](https://icons8.com/) 
+- Szekvencia diagram: [WebSequenceDiagrams](https://www.websequencediagrams.com/)
+- Use case diagram, adatmodell diagram: [nomnoml](http://nomnoml.com/)
+- Oldalvázlatok: [Lumzy](http://lumzy.com/app/)
+- Datepicker: [Bootstrap Datepicker](https://bootstrap-datepicker.readthedocs.io/en/latest/)
+- Template: [Cosmo from Bootswatch](https://bootswatch.com/)
+- Favicon: [Icons8](https://icons8.com/) 
