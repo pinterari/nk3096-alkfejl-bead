@@ -147,6 +147,10 @@ Ha a felhasználó ki akar lépni egy csoportból, egy felugró ablakban kérjü
 - Módosított fájlok: `Http/routes.js`, `Http/Controllers/TeamController.js`, `resources/views/team.njk`
 - Új fájlok: `public/quitTeam.js`
 
+###3.4 Form validáció
+A fejlesztés előtt a felhasználó csak a regisztrációs kérelem elküldése után tudta meg, ha hibás adatokkal próbált regisztrálni, ezentúl viszont a [Bootstrap Validatior](https://1000hz.github.io/bootstrap-validator/) plugin segítségével valós időben, már a kliens oldalon megtörténik a validáció első lépése.
+- Módosított fájlok: `resources/views/signup.njk`
+
 ## 4. Tesztelés
 
 ### 4.1 Tesztelési környezet
