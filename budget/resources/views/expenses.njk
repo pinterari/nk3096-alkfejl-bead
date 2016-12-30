@@ -1,8 +1,12 @@
 {% extends 'parent' %}
 
-{%block content%}
+{% block scripts %}
+<script src="/getMonth.js"></script>
+{% endblock %}
 
-<h3>{{beginDate}} - {{endDate}}</h3>
+{% block content %}
+
+<h3 id="date">{{beginDate}} - {{endDate}}</h3>
 <form class="form-inline" method="POST">
     {{ csrfField }}
     <div class="input-group date">
@@ -58,16 +62,11 @@
                         {{exp.comment}}
                     {% endif %}
                 </td>
-                <td align="center"><a href="/expenses/{{exp.id}}/delete"><img src="/assets/delete.png" style="height:20px"></a></td>
-               <!-- <td align="center">
-                    
-                    <form id="torol" action="/expenses/{{exp.id}}/delete" method="POST">
-                        {{ csrfField }}
+                <td align="center">
+                    <a href="/expenses/{{exp.id}}/delete"> 
                         <img src="/assets/delete.png" style="height:20px">
-                        <input type="submit" class="btn btn-sm btn-danger" value="Törlés"/>
-                    </form>-->
-
-                </td> 
+                    </a>
+                </td>
 
             </tr>
         {% endif %}
