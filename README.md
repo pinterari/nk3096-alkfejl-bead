@@ -127,6 +127,30 @@ A dőlten szedett funckiók csak az adott csoport teljes jogkörű felhasználó
 ### 2.4 Adatmodell 
 ![Adatmodell](docs/images/adatmodell.png)
 
+## 3. Szerveroldali JavaScript fejlesztés
+
+###3.1 Keresőmező (AJAX)
+A fejlécen található keresőmező felokosítása; a beírt "töredék" alapján lévő első 5 találat listázása a keresőmező alatt a gyorsabb elérés érdekében. Ezentúl a `UserController`-ben a `search` függvény helyett az `ajaxSearch` függvény fut le a keresések során.
+- Módosított fájlok: `Http/routes.js`, `Http/Controllers/UserController.js`, `resources/views/parent.njk`
+- Új fájlok: `public/search.js`, `public/search.css`
+
+###3.2 Bejelentkezés (AJAX)
+A bejelentkezés ezentúl egy felugró ablakban történik meg az új oldal helyett. Ezentúl a `UserController`-ben a `login` függvény helyett az `ajaxLogin` függvény hívódik meg bejelentkezéskor.
+- Módosított fájlok: `Http/routes.js`, `Http/Controllers/UserController.js`, `resources/views/parent.njk`
+- Új fájlok: `public/login.js`
+
+###### Szekvenciadiagram a bejelentkezéshez
+![Szekvenciadiagram](docs/images/seqdia.png)
+
+###3.3 Kilépés a csoportból (AJAX)
+Ha a felhasználó ki akar lépni egy csoportból, egy felugró ablakban kérjük meg, hogy erősítse meg kilépési szándékát. Ezentúl a `TeamController`-ben a `quit` függvény helyett az `ajaxQuit` függvény fut le a csoportból való kilépés gombra nyomás után.
+- Módosított fájlok: `Http/routes.js`, `Http/Controllers/TeamController.js`, `resources/views/team.njk`
+- Új fájlok: `public/quitTeam.js`
+
+###3.4 Form validáció
+A fejlesztés előtt a felhasználó csak a regisztrációs kérelem elküldése után tudta meg, ha hibás adatokkal próbált regisztrálni, ezentúl viszont a [Bootstrap Validatior](https://1000hz.github.io/bootstrap-validator/) plugin segítségével valós időben, már a kliens oldalon megtörténik a validáció első lépése.
+- Módosított fájlok: `resources/views/signup.njk`
+
 ## 4. Tesztelés
 
 ### 4.1 Tesztelési környezet
@@ -142,3 +166,34 @@ Funkcionális tesztelés során az oldal funkcióinak működését ellenőrizz�
 #### 4.3 Tesztesetek
 - Regisztráció: `signup.test`
 - Új kiadás hozzáadása: `newexpense.test`
+
+## 5. Felhasználói dokumentáció
+
+### 5.1 Minimális rendszerkövetelmény:
+- Pentium 4 vagy újabb processzor
+- 512MB RAM
+- 200MB hely a merevlemezen
+
+### 5.2 Szükséges szoftverek:
+- [nodeJS](https://nodejs.org/en/)
+- [npm](https://www.npmjs.com/)
+- internetes böngésző (pl. [Google Chrome](https://www.google.com/chrome/browser/index.html))
+- IDE a szerkesztéshez (pl. [Visual Studio Code](https://code.visualstudio.com/))
+
+### 5.3 Telepítés
+1. Kód letöltése
+    - ZIP letöltése vagy
+    - `pinterari/nk3096-alkfejl-bead` klónozása vagy
+    - `pinterari/nk3096-alkfejl-bead` forkolása és a saját repository klónozása
+2. `npm install`
+3. `.env.example` fájl átnevezése `.env`-re
+4. futtatás `npm run` vagy `npm run dev` (fejlesztői mód) paranccsal
+5. `http://localhost:3333` megnyitása
+
+## 6. Függelék
+- szekvencia diagram: [WebSequenceDiagrams](https://www.websequencediagrams.com/)
+- use case diagram, adatmodell diagram: [nomoml](http://nomnoml.com/)
+- oldalvázlatok: [Lumzy](http://lumzy.com/app/)
+- datepicker: [Bootstrap Datepicker](https://bootstrap-datepicker.readthedocs.io/en/latest/)
+- template: [Cosmo from Bootswatch](https://bootswatch.com/)
+- favicon: [Icons8](https://icons8.com/) 
