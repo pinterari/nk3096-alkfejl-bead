@@ -130,18 +130,18 @@ A dőlten szedett funckiók csak az adott csoport teljes jogkörű felhasználó
 ## 3. Szerveroldali JavaScript fejlesztés
 
 ###3.1 Keresőmező (AJAX)
-A fejlécen található keresőmező felokosítása; a beírt "töredék" alapján lévő első 5 találat listázása a keresőmező alatt a gyorsabb elérés érdekében.
-- Érintett fájlok: `Http/routes.js`, `Http/Controllers/UserController.js`
+A fejlécen található keresőmező felokosítása; a beírt "töredék" alapján lévő első 5 találat listázása a keresőmező alatt a gyorsabb elérés érdekében. Ezentúl a `UserController`-ben a `search` függvény helyett az `ajaxSearch` függvény fut le a keresések során.
+- Módosított fájlok: `Http/routes.js`, `Http/Controllers/UserController.js`, `resources/views/parent.njk`
 - Új fájlok: `public/search.js`, `public/search.css`
 
 ###3.2 Bejelentkezés (AJAX)
-A bejelentkezés ezentúl egy felugró ablakban történik meg az új oldal helyett.
-- Érintett fájlok: `Http/routes.js`, `Http/Controllers/UserController.js`
+A bejelentkezés ezentúl egy felugró ablakban történik meg az új oldal helyett. Ezentúl a `UserController`-ben a `login` függvény helyett az `ajaxLogin` függvény hívódik meg bejelentkezéskor.
+- Módosított fájlok: `Http/routes.js`, `Http/Controllers/UserController.js`, `resources/views/parent.njk`
 - Új fájlok: `public/login.js`
 
 ###3.3 Kilépés a csoportból (AJAX)
-Ha a felhasználó ki akar lépni egy csoportból, egy felugró ablakban kérjük meg, hogy erősítse meg kilépési szándékát.
-- Érintett fájlok: `Http/routes.js`, `Http/Controllers/TeamController.js`
+Ha a felhasználó ki akar lépni egy csoportból, egy felugró ablakban kérjük meg, hogy erősítse meg kilépési szándékát. Ezentúl a `TeamController`-ben a `quit` függvény helyett az `ajaxQuit` függvény fut le a csoportból való kilépés gombra nyomás után.
+- Módosított fájlok: `Http/routes.js`, `Http/Controllers/TeamController.js`, `resources/views/team.njk`
 - Új fájlok: `public/quitTeam.js`
 
 ## 4. Tesztelés
