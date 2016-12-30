@@ -139,6 +139,9 @@ A bejelentkezés ezentúl egy felugró ablakban történik meg az új oldal hely
 - Módosított fájlok: `Http/routes.js`, `Http/Controllers/UserController.js`, `resources/views/parent.njk`
 - Új fájlok: `public/login.js`
 
+###### Szekvenciadiagram a bejelentkezéshez
+![Szekvenciadiagram](docs/images/seqdia.png)
+
 ###3.3 Kilépés a csoportból (AJAX)
 Ha a felhasználó ki akar lépni egy csoportból, egy felugró ablakban kérjük meg, hogy erősítse meg kilépési szándékát. Ezentúl a `TeamController`-ben a `quit` függvény helyett az `ajaxQuit` függvény fut le a csoportból való kilépés gombra nyomás után.
 - Módosított fájlok: `Http/routes.js`, `Http/Controllers/TeamController.js`, `resources/views/team.njk`
@@ -159,3 +162,11 @@ Funkcionális tesztelés során az oldal funkcióinak működését ellenőrizz�
 #### 4.3 Tesztesetek
 - Regisztráció: `signup.test`
 - Új kiadás hozzáadása: `newexpense.test`
+
+## 5. Függelék
+- szekvencia diagram: [WebSequenceDiagrams](https://www.websequencediagrams.com/)
+- use case diagram, adatmodell diagram: [nomoml](http://nomnoml.com/)
+- oldalvázlatok: [Lumzy](http://lumzy.com/app/)
+- datepicker: [Bootstrap Datepicker](https://bootstrap-datepicker.readthedocs.io/en/latest/)
+- template: [Cosmo from Bootswatch](https://bootswatch.com/)
+- favicon: [Icons8](https://icons8.com/) 
