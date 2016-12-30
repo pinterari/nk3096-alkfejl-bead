@@ -1,58 +1,65 @@
 {% extends 'parent' %}
 
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+{% endblock %}
+
 {% block content %}
 
-<h1> Regisztráció </h1>
+    <h1> Regisztráció </h1>
 
-        <ul>
-        {% for error in old('errors') %}
-            <li>{{error.message}}</li>
-        {% endfor %}
-        </ul>
+    <ul>
+    {% for error in old('errors') %}
+        <li>{{error.message}}</li>
+    {% endfor %}
+    </ul>
 
-        <form class = "form-horizontal" method="POST">
-            <fieldset>
-                {{ csrfField }}
-                <div class="form-group">
-                    <label name = "username" for="username" class="col-lg-2 control-label">Felhasználónév</label>
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" name="username" id="username">
-                    </div>
-                </div>
+    <form class="form-horizontal" data-toggle="validator" method="POST">
+        <fieldset>
+        {{ csrfField }}
+        <div class="form-group">
+            <label name="username" for="username" class="col-lg-2 control-label">Felhasználónév</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" name="username" id="username" pattern="[a-zA-Z0-9_\-\.]{1,}$" required>
+                <div class="help-block with-errors">Megengedett karakterek: az angol ábécé kis- és nagybetűi, számok, valamint a '_', '-' és '.' karakterek.</div>
+            </div>
+        </div>
 
-                <div class="form-group">
-                    <label name = "email" for="email" class="col-lg-2 control-label">Email</label>
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" name="email" id="email">
-                    </div>
-                </div>
+        <div class="form-group">
+            <label name="email" for="email" class="col-lg-2 control-label">Email</label>
+            <div class="col-lg-10">
+                <input type="email" class="form-control" name="email" id="email" data-error="Nem megfelelő email cím formátum!" required>
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
 
-                <div class="form-group">
-                    <label name = "password" for="password" class="col-lg-2 control-label">Jelszó</label>
-                    <div class="col-lg-10">
-                        <input type="password" class="form-control" name="password" id="password">
-                    </div>
-                </div>
+        <div class="form-group">
+            <label name="password" for="password" class="col-lg-2 control-label">Jelszó</label>
+            <div class="col-lg-10">
+                <input type="password" class="form-control" name="password" id="password" required>
+            </div>
+        </div>
 
-                <div class="form-group">
-                    <label name = "passwordAgain" for="passwordAgain" class="col-lg-2 control-label">Jelszó (ismét)</label>
-                    <div class="col-lg-10">
-                        <input type="password" class="form-control" name="passwordAgain" id="passwordAgain">
-                    </div>
-                </div>
+        <div class="form-group">
+            <label name="passwordAgain" for="passwordAgain" class="col-lg-2 control-label">Jelszó (ismét)</label>
+            <div class="col-lg-10">
+                <input type="password" class="form-control" name="passwordAgain" id="passwordAgain" data-match="#password" data-match-error="A két jelszó nem egyezik!" required>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
 
-                <div class="form-group">
-                    <label name = "funds" for="funds" class="col-lg-2 control-label">Induló tőke (forintban)</label>
-                    <div class="col-lg-10">
-                        <input type="number" class="form-control" name="funds" id="funds">
-                    </div>
-                </div>
+        <div class="form-group">
+            <label name="funds" for="funds" class="col-lg-2 control-label">Induló tőke (forintban)</label>
+            <div class="col-lg-10">
+                <input type="number" class="form-control" name="funds" id="funds">
+            </div>
+        </div>
 
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Regisztráció</button>
-                </div>
-            </fieldset>
-        </form> 
-    </div>
+        <div class="form-group col-lg-2">
+            <button type="submit" class="btn btn-primary">Regisztráció</button>
+        </div>
+        </fieldset>
+    </form> 
 
 {% endblock %}
